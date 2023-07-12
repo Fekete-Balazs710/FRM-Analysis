@@ -1,0 +1,20 @@
+version: '3.4'
+services:
+   jupyter:
+      build: ./jupyter
+      container_name: jupyter
+      ports:
+       - '8888:8888'
+      user: '0'
+      volumes:
+       - './jupyter:/home/jovyan/work'
+   grafana:
+      image: grafana/grafana
+      container_name: grafana
+      restart: always
+      ports:
+         - '3000:3000'
+      volumes:
+         -  ./grafana:/var/lib/grafana
+      environment:
+         - GF_INSTALL_PLUGINS=grafana-googlesheets-datasource
